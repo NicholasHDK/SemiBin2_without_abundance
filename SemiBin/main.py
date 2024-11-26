@@ -782,11 +782,12 @@ def generate_sequence_features_single(logger, contig_fasta,
     data_split.csv has the features(kmer and abundace) for contigs that are breaked up as must-link pair.
 
     """
+    only_kmer = True  # TODO
     import pandas as pd
 
     if bams is None and abundances is None and not only_kmer:
         sys.stderr.write(
-            f"Error: You need to specify input BAM files or abundance files if you want to calculate coverage features.\n")
+            f"WE ALSO SKIPPED THIS Error: You need to specify input BAM files or abundance files if you want to calculate coverage features.\n")
         sys.exit(1)
 
     if (bams is not None or abundances is not None) and only_kmer:
@@ -795,10 +796,13 @@ def generate_sequence_features_single(logger, contig_fasta,
     logger.debug('Start generating kmer features from fasta file.')
     kmer_whole = generate_kmer_features_from_fasta(
         contig_fasta, binned_length, 4)
-    if only_kmer:
-        with atomic_write(os.path.join(output, 'data.csv'), overwrite=True) as ofile:
-            kmer_whole.to_csv(ofile)
-        return
+
+    #  TODO
+    # if only_kmer:
+    #     with atomic_write(os.path.join(output, 'data.csv'), overwrite=True) as ofile:
+    #         kmer_whole.to_csv(ofile)
+    #     return
+    is_combined = False
 
     kmer_split = generate_kmer_features_from_fasta(
         contig_fasta, 1000, 4, split=True, split_threshold=must_link_threshold)
@@ -858,9 +862,11 @@ def generate_sequence_features_single(logger, contig_fasta,
     else:
         data_split = kmer_split
 
-    kmer_whole.index = kmer_whole.index.astype(str)
-    data = pd.merge(kmer_whole, data_cov, how='inner', on=None,
-                                  left_index=True, right_index=True, sort=False, copy=True)
+    # TODO:
+    # kmer_whole.index = kmer_whole.index.astype(str)
+    # data = pd.merge(kmer_whole, data_cov, how='inner', on=None,
+    #                               left_index=True, right_index=True, sort=False, copy=True)
+    data = kmer_whole
 
     with atomic_write(os.path.join(output, 'data.csv'), overwrite=True) as ofile:
         data.to_csv(ofile)
@@ -1211,8 +1217,9 @@ def single_easy_binning(logger, args, binned_length,
     logger.info('Generating training data...')
     if args.depth_metabat2 is None and args.bams is None and args.abundances is None:
         sys.stderr.write(
-            f"Error: You need to input bam files if you want to calculate coverage features.\n")
-        sys.exit(1)
+            f"SKIP THIS ERROR: Error: You need to input bam files if you want to calculate coverage features.\n")
+
+        # sys.exit(1)
 
     if (args.bams is not None or args.abundances is not None) and args.depth_metabat2 is not None:
         logger.info('We will use abundance information from Metabat2.')
