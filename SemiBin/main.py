@@ -1169,7 +1169,7 @@ def binning_preprocess(data, depth_metabat2, model_path, environment, device):
 def binning_long(logger, data, minfasta, binned_length, contig_dict,
         model_path, output, device, environment, *, args):
     from .long_read_cluster import cluster_long_read
-    logger.info('Start binning.')
+    logger.info('Start binning. (IN binning_long)')
     is_combined, n_sample, data, model = binning_preprocess(data, getattr(args, 'depth_metabat2', None), model_path, environment, device)
     cluster_long_read(logger,
                       model,
@@ -1196,7 +1196,7 @@ def binning_short(logger, data, minfasta,
     """
     from .cluster import cluster
     import pandas as pd
-    logger.info('Start binning.')
+    logger.info('Start binning. IN binning_short')
 
     is_combined, n_sample, data, model = binning_preprocess(data, getattr(args, 'depth_metabat2', None), model_path, environment, device)
     cluster(

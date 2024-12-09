@@ -51,6 +51,7 @@ def cluster_long_read(logger, model, data, device, is_combined,
             minfasta):
     import pandas as pd
     from .utils import norm_abundance
+    logger.info("ENTERING CLUSTER_LONG_READ")
     contig_list = data.index.tolist()
     if not is_combined:
         train_data_input = data.values[:, 0:136]
