@@ -282,7 +282,8 @@ def cluster(logger, model, data, device, is_combined,
             is_combined=is_combined, n_sample=n_sample,
             contig_dict=contig_dict, num_process=args.num_process,
             random_seed=args.random_seed)
-
+    logger.info("EMBEDDING HAS TYPE:")
+    logger.info(type(embedding))
     if args.write_pre_reclustering_bins or not args.recluster:
         output_bin_path = os.path.join(out,
                     'output_prerecluster_bins' if args.recluster else 'output_bins')
