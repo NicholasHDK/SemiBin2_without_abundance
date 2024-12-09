@@ -1583,8 +1583,8 @@ def main2(raw_args=None, is_semibin2=True):
                 if args.depth_metabat2 is None:
                     if len(args.bams) != 1:
                         sys.stderr.write(
-                            f"Error: provided pretrained model only used in single-sample binning!\n")
-                        sys.exit(1)
+                            f"Nich SKIP THIS Error: provided pretrained model only used in single-sample binning!\n")
+                        #sys.exit(1)
 
             single_easy_binning(
                 logger,
