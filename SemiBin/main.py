@@ -869,7 +869,7 @@ def generate_sequence_features_single(logger, contig_fasta,
     data = kmer_whole
     import numpy as np
     npdata = data.to_numpy()
-    np.save((os.path.join(output, 'data.npy'), npdata))
+    np.save(os.path.join(output, 'data.npy'), npdata)
     
     with atomic_write(os.path.join(output, 'data.csv'), overwrite=True) as ofile:
         data.to_csv(ofile)
