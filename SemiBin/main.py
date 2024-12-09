@@ -1581,7 +1581,7 @@ def main2(raw_args=None, is_semibin2=True):
             check_install(False, args.orf_finder, allow_missing_mmseqs2=(args.environment is not None or args.training_type == 'self'))
             if args.environment is not None:
                 if args.depth_metabat2 is None:
-                    if len(args.bams) != 1:
+                    if args.bams == None or len(args.bams) != 1:
                         sys.stderr.write(
                             f"Nich SKIP THIS Error: provided pretrained model only used in single-sample binning!\n")
                         #sys.exit(1)
