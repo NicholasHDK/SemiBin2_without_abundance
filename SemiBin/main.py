@@ -1156,8 +1156,8 @@ def binning_preprocess(data, depth_metabat2, model_path, environment, device):
     model_path = model_path if environment is None else get_model_path(environment)
     if environment is not None:
         if data.shape[1] != 138:
-            sys.stderr.write(f"Error: provided pretrained model only used in single-sample binning!\n")
-            sys.exit(1)
+            sys.stderr.write(f"nich SKIP THIS Error2: provided pretrained model only used in single-sample binning!\n")
+            #sys.exit(1)
 
     if device == torch.device('cpu'):
         model = torch.load(model_path, map_location=torch.device('cpu'))

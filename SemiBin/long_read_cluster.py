@@ -66,7 +66,8 @@ def cluster_long_read(logger, model, data, device, is_combined,
         model.eval()
         x = torch.from_numpy(train_data_input).to(device)
         embedding = model.embedding(x.float()).detach().cpu().numpy()
-
+    print(embedding.shape)
+    np.save(os.path.join(args.output, "embeddings.npy", embedding))
     length_weight = np.array(
         [len(contig_dict[name]) for name in contig_list])
 
